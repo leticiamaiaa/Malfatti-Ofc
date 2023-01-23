@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Net;
 using malfatti.Context;
 using malfatti.Servico;
+using malfatti.DAL;
 using malfatti.Serviço;
 using System.IO;
 
@@ -15,46 +16,28 @@ namespace malfatti.Controllers
 
     public class ProdutoController : Controller
     {
-        
-        private ProdutoServico produto = new ProdutoServico();
-        private CategoriaServico categoria = new CategoriaServico();
-        private FabricanteServico fabricante = new FabricanteServico();
+        private ProdutoServico produtoServico = new ProdutoServico();
+        private CategoriaServico categoriaServico = new CategoriaServico();
+        private FabricanteServico fabricanteServico = new FabricanteServico();
+        private string strFileName;
 
-        //Pega os detalhes do produto de acordo com o id, serve para diminuir a redundância na hora de mostrar vz
-        private ActionResult ObterVisaoProdutoPorId(long? id)
+        private EFContext context = new EFContext();
+        //GET: Produtos
+        public ActionResult Index()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Produto produto = produto.ObterProdutoPorId((long?)id);
-            if (produto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(produto);
-        }
-        // Serve para popular combobox
-        private void PopularViewBag(Produto produto = null)
-        {
-            if (produto == null)
-            {
-                ViewBag.CategoriaId = new SelectList(categoria.ObterCategoriasClassificadasPorNome(),
-                "CategoriaId", "Nome");
-                ViewBag.FabricanteId = new SelectList(fabricante.ObterFabricantesClassificadosPorNome(),
-                "EstudioId", "Nome");
-            }
-            else
-            {
-                ViewBag.CategoriaId = new SelectList(categoria.ObterCategoriasClassificadasPorNome(),
-                "CategoriaId", "Nome", produto.CategoriaId);
-                ViewBag.FabricanteId = new SelectList(fabricante.ObterFabricantesClassificadosPorNome(),
-                "EstudioId", "Nome", produto.FabricanteId);
-            }
+            var produtos = context.Produtos.Include(c => c.Categoria).Include(f => f.Fabricante).
+            OrderBy(n => n.Nome);
+            return View(produtos);
         }
 
-        // Salva os produtos
-        private ActionResult GravarProduto(Produto produto, HttpPostedFileBase upimg, string chkRemoverImagem)
+        private byte[] SetLogotipo(HttpPostedFileBase logotipo)
+        {
+            var bytesLogotipo = new byte[logotipo.ContentLength];
+            logotipo.InputStream.Read(bytesLogotipo, 0, logotipo.ContentLength);
+            return bytesLogotipo;
+        }
+
+        private ActionResult GravarProduto(Produto produto, HttpPostedFileBase logotipo, string chkRemoverImagem)
         {
             try
             {
@@ -62,25 +45,19 @@ namespace malfatti.Controllers
                 {
                     if (chkRemoverImagem != null)
                     {
-                        produto.UpImg = null;
+                        produto.Logotipo = null;
                     }
-                    if (upimg != null)
+                    if (logotipo != null)
                     {
-                        produto.UpImgMimeType = upimg.ContentType;
-                        produto.UpImg = SetUpImg(upimg);
+                        produto.LogotipoMimeType = logotipo.ContentType;
+                        produto.Logotipo = SetLogotipo(logotipo);
+                        produto.NomeArquivo = logotipo.FileName;
+                        produto.TamanhoArquivo = logotipo.ContentLength;
+                        strFileName = Server.MapPath("~/App_Data/") + Path.GetFileName(logotipo.FileName); logotipo.SaveAs(strFileName);
                     }
-                    produto.GravarProduto(produto);
+                    produtoServico.GravarProduto(produto);
                     return RedirectToAction("Index");
                 }
-                if (upimg != null)
-                {
-                    produto.UpImgMimeType = upimg.ContentType;
-                    produto.UpImg = SetUpImg(upimg);
-                    produto.NomeArquivo = upimg.FileName;
-                    produto.TamanhoArquivo = upimg.ContentLength;
-                }
-                
-                produto.GravarProduto(produto);
                 PopularViewBag(produto);
                 return View(produto);
             }
@@ -91,41 +68,74 @@ namespace malfatti.Controllers
             }
         }
 
-        //transfrma o arquivo recebido em um vetor de bytes
-        private byte[] SetUpImg(HttpPostedFileBase upimg)
+        public FileContentResult GetLogotipo(long id)
         {
-            var bytesUpImg = new byte[upimg.ContentLength];
-            upimg.InputStream.Read(bytesUpImg, 0, upimg.ContentLength);
-            return bytesUpImg;
-        }
-
-        //contém a imagem para a exibição na visão
-        public FileContentResult GetUpImg(long id)
-        {
-            Produto produto = produto.ObterProdutoPorId(id);
+            Produto produto = produtoServico.ObterProdutoPorId(id);
             if (produto != null)
             {
-                return File(produto.UpImg, produto.UpImgMimeType);
+                return File(produto.Logotipo, produto.LogotipoMimeType);
             }
             return null;
         }
 
-        //transferece o arquivo copiado do banco de dados para a pasta de download
         public ActionResult DownloadArquivo(long id)
         {
-            Produto produto = produto.ObterProdutoPorId(id);
+            Produto produto = produtoServico.ObterProdutoPorId(id);
             FileStream fileStream = new FileStream(Server.MapPath("~/App_Data/" + produto.NomeArquivo), FileMode.Create, FileAccess.Write);
-            fileStream.Write(produto.UpImg, 0, Convert.ToInt32(produto.TamanhoArquivo));
+            fileStream.Write(produto.Logotipo, 0, Convert.ToInt32(produto.TamanhoArquivo));
             fileStream.Close();
-            return File(fileStream.Name, produto.UpImgMimeType, produto.NomeArquivo);
+            return File(fileStream.Name, produto.LogotipoMimeType, produto.NomeArquivo);
         }
 
-
-        [Authorize(Roles = "Administradores")]
-        public ActionResult Index()
+        public ActionResult DownloadArquivo2(long id)
         {
-            return View(ProdutoServico.ObterProdutosClassificadosPorNome());
+            Produto produto = produtoServico.ObterProdutoPorId(id);
+            FileStream fileStream = new FileStream(Server.MapPath("~/App_Data/" + produto.NomeArquivo), FileMode.Open, FileAccess.Read);
+            return File(fileStream.Name, produto.LogotipoMimeType, produto.NomeArquivo);
         }
+
+        public FileContentResult GetLogotipo2(long id)
+        {
+            Produto produto = produtoServico.ObterProdutoPorId(id);
+            if (produto != null)
+            {
+                if (produto.NomeArquivo != null)
+                {
+                    var bytesLogotipo = new byte[produto.TamanhoArquivo];
+                    FileStream fileStream = new
+                    FileStream(Server.MapPath("~/App_Data/" + produto.NomeArquivo), FileMode.Open,
+                    FileAccess.Read);
+                    fileStream.Read(bytesLogotipo, 0, (int)produto.TamanhoArquivo);
+                    return File(bytesLogotipo, produto.LogotipoMimeType);
+                }
+            }
+            return null;
+        }
+
+        private void PopularViewBag(Produto produto = null)
+        {
+            if (produto == null)
+            {
+                ViewBag.CategoriaId = new SelectList(categoriaServico.ObterCategoriasClassificadasPorNome(),
+                "CategoriaId", "Nome");
+                ViewBag.FabricanteId = new SelectList(fabricanteServico.ObterFabricantesClassificadosPorNome(),
+                "FabricanteId", "Nome");
+            }
+            else
+            {
+                ViewBag.CategoriaId = new SelectList(categoriaServico.ObterCategoriasClassificadasPorNome(),
+                "CategoriaId", "Nome", produto.CategoriaId);
+                ViewBag.FabricanteId = new SelectList(fabricanteServico.ObterFabricantesClassificadosPorNome(),
+                "FabricanteId", "Nome", produto.FabricanteId);
+            }
+        }
+
+        public JsonResult GetProdutosPorNome(string param)
+        {
+            var r = produtoServico.ObterProdutosPorNome(param);
+            return Json(r, JsonRequestBehavior.AllowGet);
+        }
+        
 
         // GET: Produtos/Details/5
         public ActionResult Details(long? id)

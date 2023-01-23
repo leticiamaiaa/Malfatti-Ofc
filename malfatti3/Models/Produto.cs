@@ -12,17 +12,11 @@ namespace malfatti.Models
     {
         [DisplayName("ID")]
         public long ProdutoId { get; set; }
-        [StringLength(100, ErrorMessage = "O nome do produto precisa ter no mínimo 8 caracteres", MinimumLength = 8)]
+        [StringLength(100, ErrorMessage = "O nome do produto precisa ter no mínimo 10 caracteres", MinimumLength = 10)]
         [Required(ErrorMessage = "Informe o nome do produto")]
         public string Nome { get; set; }
-        [Required(ErrorMessage = "Informe data de cadastro do produto")]
-        public DateTime? DataCadastro { get; set; }
-        [DisplayName("Preço")]
         [Range(1, Double.PositiveInfinity)]
-        [Required(ErrorMessage = "O preço deve conter um valor válido")]
         public Decimal Preco { get; set; }
-        [DisplayName("Quantidade")]
-        public int Qtd { get; set; }
         public String Descricao { get; set; }
         public bool Disponivel { get; set; }
         [DisplayName("Categoria")]
@@ -31,10 +25,22 @@ namespace malfatti.Models
         public long? FabricanteId { get; set; }
         public Categoria Categoria { get; set; }
         public Fabricante Fabricante { get; set; }
-        public string UpImgMimeType { get; set; }
-        public byte[] UpImg { get; set; }
+        [DisplayName("Tipo do Logitipo")]
+        public string LogotipoMimeType { get; set; }
+        [DisplayName("Logotipo")]
+        public byte[] Logotipo { get; set; }
+        public bool Destaque { get; set; }
+
+        [DisplayName("Nome do arquivo")]
         public string NomeArquivo { get; set; }
+        [DisplayName("Tamanho do arquivo")]
         public long TamanhoArquivo { get; set; }
-        public string Slug { get; set; }
+
+        public virtual ICollection<ItemProduto> ItensProduto { get; set; }
+
+        internal static object FirstOrDefault(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

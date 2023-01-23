@@ -1,6 +1,7 @@
 ﻿using malfatti.Context;
 using malfatti.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -39,6 +40,19 @@ namespace malfatti.DAL
             context.Produtos.Remove(produto);
             context.SaveChanges();
             return produto;
+        }
+        public IList ObterProdutosPorNome(string param)
+        {
+            var r = from produto in context.Produtos
+                    where produto.Nome.ToUpper().StartsWith(param.ToUpper())
+                    orderby (produto.Nome)
+                    select new
+                    {
+                        id = produto.ProdutoId,
+                        label = produto.Nome,
+                        value = produto.Nome
+                    };
+            return r.ToList();
         }
     }
 }

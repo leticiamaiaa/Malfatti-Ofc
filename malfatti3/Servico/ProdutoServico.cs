@@ -1,6 +1,7 @@
 ﻿using malfatti.DAL;
 using malfatti.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,5 +27,10 @@ namespace malfatti.Serviço
         {
             return produtoDAL.EliminarProdutoPorId(id);
         }
+        public IList ObterProdutosPorNome(string param)
+        {
+            return produtoDAL.ObterProdutosPorNome(param);
+        }
+        
     }
 }
