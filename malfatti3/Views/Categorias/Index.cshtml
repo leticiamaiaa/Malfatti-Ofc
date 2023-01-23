@@ -1,0 +1,49 @@
+﻿@model IEnumerable<malfatti.Models.Categoria>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="~/App_Themes/Tema1/Index.css" />
+    <title>Malfatti</title>
+</head>
+<body>
+    <h1>Relação de CATEGORIAS registradas</h1>
+    <main>
+        <section>
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoriaId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoriaId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Alterar", "Edit", new { id = item.CategoriaId })
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.CategoriaId })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.CategoriaId })
+                        </td>
+                    </tr>
+                }
+                <tr>
+                @Html.ActionLink("Registrar uma nova categoria", "Create", null, new { @class = "btn btn-success" })
+                </tr>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

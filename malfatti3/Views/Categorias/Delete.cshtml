@@ -1,0 +1,32 @@
+﻿@model malfatti.Models.Categoria
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/App_Themes/Categoria/Delete.css" />
+    <link rel="stylesheet" type="text/css" href="delete1.css" />
+    <title>Malfatti</title>
+</head>
+<body>
+    <header>
+        <h1>Dados do FABRICANTE a ser removido!</h1>
+    </header>
+    <main>
+        @using (Html.BeginForm("Delete", "Categorias", FormMethod.Post))
+        {
+
+            @Html.AntiForgeryToken()
+            <h3>Nome:</h3>
+            @Html.DisplayNameFor(model => model.Nome)
+
+            <input id="submit" type="submit" value="Remover Fabricante" />
+
+            @Html.ActionLink("Retornar para a listagem de CATEGORIAS", "Index", null,
+        new { @class = "btn btn-warning" })}
+    </main>
+</body>
+</html>
+

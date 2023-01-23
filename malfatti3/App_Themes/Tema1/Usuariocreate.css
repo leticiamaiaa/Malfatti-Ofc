@@ -1,0 +1,165 @@
+﻿* {
+    font-family: 'Abel', sans-serif;
+    margin: auto;
+    font-size: 1em;
+}
+
+body {
+    background-color: rgba(212, 206, 185, 1);
+    margin-top: 1em;
+}
+
+
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 1.4em;
+    margin-top:2em;
+}
+
+p {
+    font-size: 1em;
+    text-align: center;
+    margin: 0.3em 0 1em 0;
+}
+
+main p {
+    padding-bottom: 1em;
+}
+
+h2 {
+    margin: 1em 0 1em 0;
+    font-weight: bold;
+    margin-bottom: 0.1225em;
+    text-align: center;
+    margin: 2em 0;
+}
+
+body div {
+    background-color: white;
+    min-width: 12cm;
+    max-width: 12cm;
+    min-height: 100%;
+    max-height: 19cm;
+}
+
+header {
+    padding: 0 1.3em 1.3em 1.3em;
+    background-color: rgba(212, 206, 185, 1);
+    position: relative;
+}
+
+#botaosubmit {
+    background:#9E895E;
+    color: white;
+    font-weight: bold;
+    padding: 1em 10.5em;
+    border: none;
+    margin: 1em 1em 0.6em 1em;
+}
+
+.form-input {
+    border-radius: 8px;
+    border: 12px;
+    margin: 1.4em 1.4em;
+    font-size: 0.8em;
+    padding: 1em;
+    text-align: left;
+}
+
+/*@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #FFFFFF;
+}
+header{
+    background-color: #9E895E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    gap: 1em;
+    padding: 0 4em;
+    height: 4.5em;
+}
+header img{
+    height: 3em;
+}
+header nav{
+    display: flex;
+    gap: 35em;
+    margin: 0 2em;
+}
+nav a{
+    text-decoration: none;
+    color: white;
+}
+nav li{
+    font-family: 'Abel', sans-serif;
+    font-weight: 100;
+}
+ul {
+    display: flex;
+    list-style: none;
+    gap: 4em;
+    text-decoration: none;
+}
+
+h3{
+    font-family: 'Abel', sans-serif;
+    color: #000000;
+    margin: 2.5em;
+    margin-bottom: 1em;
+    font-size:1.7em ;
+}
+main img.titulo{
+    text-align: center;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+ol {
+    display: flex;
+    list-style: none;
+}
+ol li{
+    color: #000000;
+    font-family: 'Abel';
+    font-style:normal;
+    border: 0.1em solid #3B3616;
+
+    text-decoration: none;
+    margin-left: 4.3em;
+    padding: 1em;
+    display: block;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.2em;
+}
+input{
+    font-size: 3em;
+    margin-left: 1.4em;
+}
+input.descricao{
+    margin-left: 1.4em;
+    height: 4em;
+}
+article input{
+    margin: 2em;
+    margin-left: 4.2em;
+    font-size: 1em;
+}
+footer{
+    background-color: #C2B999;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 6em;
+    padding: 3em;
+}*/
+

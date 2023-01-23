@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using malfatti.Models;
+using Models.Sistema;
+using malfatti.DAL;
+using malfatti.Models.Sistema;
+
+namespace malfatti.Infraestrutura
+{
+    public class GerenciadorUsuario : UserManager<UsuarioAdm>
+    {
+        public GerenciadorUsuario(IUserStore<UsuarioAdm> store) : base(store)
+        { }
+        public static GerenciadorUsuario Create(
+        IdentityFactoryOptions<GerenciadorUsuario> options, IOwinContext context)
+        {
+            IdentityDbContextAplicacao db =
+            context.Get<IdentityDbContextAplicacao>();
+            GerenciadorUsuario manager = new GerenciadorUsuario(
+            new UserStore<UsuarioAdm>(db));
+            return manager;
+        }
+    }
+}

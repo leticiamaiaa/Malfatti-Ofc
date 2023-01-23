@@ -1,0 +1,33 @@
+﻿@model malfatti.Models.Categoria
+
+@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/App_Themes/Categoria/Edit.css" />
+    <link rel="stylesheet" type="text/css" href="padrao2.css" />
+    <title>Malfatti</title>
+</head>
+<body>
+    <header>
+        <h1>Alteração dos dados de uma CATEGORIA</h1>
+    </header>
+
+    <main>
+        @using (Html.BeginForm("Edit", "Categorias", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <section>
+                <h2>Nome:</h2>
+                @Html.TextBoxFor(f => f.Nome, new { placeholder = "", @class = "form-input" })
+
+                <input id="submit" type="submit" value="Gravar Alterações" />
+
+                @Html.ActionLink("Retornar para a listagem", "Index", null, new { @class = "btn btn-warning" })
+            </section>}
+    </main>
+</body>
+</html>

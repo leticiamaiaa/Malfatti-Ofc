@@ -1,0 +1,116 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #FFFFFF;
+}
+header {
+    background-color: #9E895E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    gap: 1em;
+    padding: 0 4em;
+    height: 4.5em;
+}
+header img {
+    height: 3em;
+}
+header nav {
+    display: flex;
+    gap: 25em;
+    margin: 0 2em;
+}
+nav a {
+    text-decoration: none;
+    color: white;
+}
+nav li {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    padding: 5em 0;
+    justify-content: center;
+}
+main img.line {
+    width: 40em;
+    margin: 4em auto;
+    margin-top:0.5em;
+}
+/* === Parte do código anterior ===*/
+ul {
+    display: flex;
+    list-style: none;
+    gap: 4em;
+    text-decoration: none;
+}
+/* li {
+    color: #FFFFFF;
+    font-weight: bold;
+} */
+p {
+    font-family: 'Abel';
+    font-size: 2em;
+    padding: 3em;
+    text-align: center;
+    color: #000000;
+}
+
+.button {
+    list-style: none;
+    color: #000000;
+    text-decoration: none;
+    font-family: 'Abel';
+    font-style: normal;
+    font-size: 1.5em;
+    border: 0.1em solid #3B3616;
+    margin: 0 auto;
+    width: 10em;
+    padding: 1em;
+    display: block;
+    text-align: center;
+}
+
+div {
+    margin: 0 auto;
+    padding: 4em;
+    text-align: center;
+}
+
+ol {
+    display: flex;
+    margin: 2em 6em;
+    list-style-type: none;
+    padding: 2em;
+}
+
+ol li {
+    float: left;
+}
+
+ol li:nth-child(2) {
+    margin-top: 5em;
+}
+ol li img{
+    width:27em;
+}
+#relative {
+    position: relative;
+    margin: -2em -4em;
+}
+
+footer {
+    background-color: #C2B999;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3em;
+}

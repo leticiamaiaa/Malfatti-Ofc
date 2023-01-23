@@ -1,0 +1,34 @@
+﻿@model malfatti.Models.Fabricante
+
+@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/App_Themes/Padrao/PadraoFabricantes.css" />
+    <link rel="stylesheet" type="text/css" href="padrao2.css" />
+    <title>Malfatti</title>
+</head>
+<body>
+    <header>
+        <h1>Registro de um NOVO FABRICANTE</h1>
+    </header>
+
+    <main>
+        @using (Html.BeginForm("Create", "Fabricantes", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+        <section>
+            <h2>Nome:</h2>
+            @Html.TextBoxFor(f => f.Nome, new { placeholder = "", @class = "form-input" })
+
+            <input type="submit" value="Adicionar Fabricante" />
+
+            @Html.ActionLink("Retornar para a listagem de FABRICANTES", "Index", null,
+ new { @class = "btn btn-warning" })
+        </section>}
+    </main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #c3b089;
+}
+
+main {
+    background-color: #FFFFFF;
+    text-align: center;
+    margin-top: 5em;
+    margin-left: 20em;
+    margin-right: 20em;
+    margin-bottom: 5em;
+    padding: 5em;
+}
+
+h1 {
+    color: #FFFFFF;
+    font-family: 'Abel', sans-serif;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 3em;
+}
+
+h3 {
+    color: #211108;
+    font-family: 'Abel', sans-serif;
+    text-align: justify;
+    margin-left: 3.5em;
+}
+
+input {
+    font-size: 3em;
+    margin: 0.5em;
+}
+
+input[type="submit" i] {
+    font-size: 1.5em;
+    margin: 0.5em;
+}
+
+
+.button {
+    color: #000000;
+    text-decoration: none;
+    font-family: 'Abel';
+    font-size: 1.5em;
+    border: 0.1em solid #3B3616;
+    margin-bottom: 2em;
+    margin-top: 3em;
+    margin-left: 3em;
+    width: 15em;
+    padding: 1em;
+    display: block;
+    text-align: center;
+}
+
+.buttonn {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Abel';
+    font-size: 1.5em;
+    background-color: #c3b089;
+    border: 0.1em solid #3B3616;
+    margin-left: 3em;
+    width: 15em;
+    padding: 1em;
+    display: block;
+    text-align: center;
+}

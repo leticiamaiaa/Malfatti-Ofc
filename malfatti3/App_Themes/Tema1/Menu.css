@@ -1,0 +1,60 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+    background-color: #9E895E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    gap: 1em;
+    padding: 0 4em;
+    height: 4.5em;
+}
+
+header img {
+    height: 3em;
+}
+
+header nav {
+    display: flex;
+    gap: 25em;
+    margin: 0 2em;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+nav li {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+}
+
+
+/* === Parte do código anterior ===*/
+ul {
+    display: flex;
+    list-style: none;
+    gap: 4em;
+    text-decoration: none;
+}
+/* li {
+    color: #FFFFFF;
+    font-weight: bold;
+} */
+p {
+    font-family: 'Abel';
+    font-size: 2em;
+    padding: 3em;
+    text-align: center;
+    color: #000000;
+}
+

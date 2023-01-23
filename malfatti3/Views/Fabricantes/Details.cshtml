@@ -1,0 +1,31 @@
+﻿@model malfatti.Models.Fabricante
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/App_Themes/Tema1/Index.css" />
+    <link rel="stylesheet" type="text/css" href="details1.css" />
+    <title>Malfatti</title>
+</head>
+<body>
+    @using (Html.BeginForm("Details", "Fabricantes", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <h2>Visualizando detalhes de um FABRICANTE</h2>
+            <h3>Nome:</h3>
+            @Html.DisplayFor(model => model.Nome)
+
+            @Html.ActionLink("Alterar", "Edit", new { id = Model.FabricanteId },
+             new { @class = "btn btn-info" })
+
+            @Html.ActionLink("Retornar para a listagem de FABRICANTES", "Index", null, new { @class = "btn btn-warning" })
+        </div>
+    }
+</body>
+</html>
+
+@Html.Partial("~/Views/Produto/_PorFabricante.cshtml", Model.Produtos.ToList())

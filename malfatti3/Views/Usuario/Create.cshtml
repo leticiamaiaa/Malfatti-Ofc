@@ -1,0 +1,60 @@
+@model malfatti.Models.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="~/App_Themes/Tema1/Usuariocreate.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>Criar Usuário</title>
+
+</head>
+<body>
+    <header>
+        <h1>SEJA BEM-VINDO!</h1>
+        <h2>CADASTRAR-SE</h2>
+      <p>Crie uma conta e tenha acesso as funcionalidades de nossos clientes</p>
+    </header>
+    <main>
+        <div>
+            @using (Html.BeginForm("Create", "Usuario", FormMethod.Post))
+            {
+                <table>
+
+                    <tr>
+                        <td>@Html.TextBoxFor(u => u.Nome, new { placeholder = "Digite o nome", @class = "form-input" })</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.TextBoxFor(u => u.Username, new { placeholder = "Digite o nome de usuario", @class = "form-input" })</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.TextBoxFor(u => u.Email, new { placeholder = "Digite seu Email", @class = "form-input" })</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.TextBoxFor(u => u.Senha, new { placeholder = "Digite sua senha", @class = "form-input", type = "password" })</td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="submit" value="CADASTRAR" id="botaosubmit" /></td>
+                    </tr>
+
+                </table>
+            }
+
+        </div>
+        <p>Ja tem uma conta?<a href="#">Entrar</a></p>
+    </main>
+</body>
+</html>

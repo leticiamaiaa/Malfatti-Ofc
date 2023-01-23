@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@font-face {
+    font-family: adineue PRO;
+    src: url('../fonts/adineue PRO.ttf');
+}
+
+
+html {
+    display: grid;
+    min-height: 100%;
+}
+
+body {
+    display: grid;
+    background: #ffffff;
+    font-family: '';
+    text-transform: uppercase;
+}
+
+.container-detalhe {
+    position: relative;
+    margin: 50px auto;
+    overflow: hidden;
+    width: 570px;
+    height: 350px;
+    background: #9E895E;
+    box-shadow: 5px 5px 15px #9E895E;
+    border-radius: 10px;
+}
+
+.p {
+    font-size: 0.6em;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.h1 {
+    font-size: 1.2em;
+    color: white;
+    margin-top: -5px;
+    font-family: 'adineue PRO', sans-serif;
+}
+
+.h3 {
+    font-size: 1em;
+    color: white;
+    margin-top: -5px;
+}
+
+.h2 {
+    font-size: 1em;
+    color: #ffffff;
+    margin-top: -5px;
+    font-family: 'Abel', sans-serif;
+}
+
+.produto {
+    margin: 35px 62px;
+    height: 279px;
+}
+
+.product {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    top: 10%;
+    left: 60%;
+}
+
+.buttons {
+    margin-top: 120px;
+}
+
+.addtocart button {
+        background: #ffffff;
+        padding: 10px;
+        display: inline-block;
+        outline: 0;
+        border: 0;
+        margin: -1px;
+        border-radius: 2px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #9E895E;
+        cursor: pointer;
+ }
+
+.addtocart button:hover {
+    background: #C2B999;
+    transition: all 0.4s ease-in-out;
+}
+
+.add {
+    width: 67%;
+}
+
+.like {
+    width: 22%;
+}
+.images img {
+    height: 299px;
+    margin: 24px 27px;
+    max-width: 279px;
+}

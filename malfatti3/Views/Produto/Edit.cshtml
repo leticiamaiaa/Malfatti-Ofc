@@ -1,0 +1,154 @@
+﻿@model malfatti.Models.Produto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Visualizando os dados de um PRODUTO";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Alteração dos dados de um PRODUTO
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <h4>Produto</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ProdutoId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes:
+                    new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new
+                        {
+                            htmlAttributes =
+                        new { @class = "form-control" }
+                        })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new
+                        {
+                            @class =
+                        "text-danger"
+                        })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Preco, htmlAttributes:
+                    new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Preco, new
+                        {
+                            htmlAttributes =
+                        new { @class = "form-control" }
+                        })
+                        @Html.ValidationMessageFor(model => model.Preco, "", new
+                        {
+                            @class =
+                        "text-danger"
+                        })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes:
+                    new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Descricao, new
+                        {
+                            htmlAttributes =
+                        new { @class = "form-control" }
+                        })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new
+                        {
+                            @class =
+                        "text-danger"
+                        })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Disponivel, htmlAttributes:
+                    new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Disponivel, new
+                        {
+                            htmlAttributes =
+                        new { @class = "form-control" }
+                        })
+                        @Html.ValidationMessageFor(model => model.Disponivel, "", new
+                        {
+                            @class =
+                        "text-danger"
+                        })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoriaId, "CategoriaId", htmlAttributes:
+                    new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CategoriaId", null, htmlAttributes:
+                        new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoriaId, "",
+                        new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FabricanteId, "FabricanteId", htmlAttributes:
+                    new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("FabricanteId", null, htmlAttributes:
+                        new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FabricanteId, "",
+                        new { @class = "text-danger" })
+                    </div>
+                </div>
+                     @Html.HiddenFor(model => model.ProdutoId)
+            @Html.HiddenFor(model => model.UpImgMimeType)
+            @Html.HiddenFor(model => model.UpImg)
+            <div class="col-md-offset-2">
+                <div class="form-group">
+                    @Html.TextBox("upimg", "", new { type = "file" }) <br />
+                </div>
+                <div class="form-group">
+                    @if (Model.UpImg == null)
+                    {
+                        <div class="form-control-static">
+                            Nenhuma imagem adicionada
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="panel-body">
+                            <img class="img-thumbnail" src="@Url.Action("GetUpImg", "Produto", new { id = Model.ProdutoId })"
+                                 style="display: block; max-width: 200px;" />
+                        </div>
+                        <div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="chkRemoverImagem" value="Sim">Remover imagem
+
+                                </label>
+                            </div>
+                            @Html.ActionLink("Baixar o arquivo : " + Model.NomeArquivo, "DownloadArquivo",
+"Produto", null)
+                        </div>
+                    }
+                </div>
+            </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Gravar alterações" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section ScriptPage {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('li').removeClass("active");
+            $('#liProdutos').addClass("active");
+        });
+    </script>
+}
