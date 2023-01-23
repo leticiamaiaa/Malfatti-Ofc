@@ -34,8 +34,10 @@ namespace malfatti.Areas.Carrinho.Controllers
         [ValidateAntiForgeryToken]
         public PartialViewResult AddProduto(FormCollection collection)
         {
+            string xprod;
             List<ItemCarrinho> carrinho = HttpContext.Session["carrinho"] as List<ItemCarrinho>;
-            var produto = produtoServico.ObterProdutoPorId(Convert.ToInt32(collection.Get("idproduto")));
+            xprod = collection.Get("idProduto");
+            var produto = produtoServico.ObterProdutoPorId(Convert.ToInt32(xprod));
             var itemCarrinho = new ItemCarrinho();
             
 
